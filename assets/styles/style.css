@@ -1,0 +1,16 @@
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+
+.start {
+    display: block;
+}
+
+.quiz {
+    display: none;
+}
+
+.score {
+    display: none;
+}
