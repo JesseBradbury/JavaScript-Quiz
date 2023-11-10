@@ -48,7 +48,21 @@ let timerInterval = setInterval(function () {
     
 })
 
+
 // question text is displayed with 4 multiple choice answers, this will be pulled from an array
+var storedQuestions = JSON.parse(localStorage.getItem("questions"));
+
+var desiredQuestion = storedQuestions[0].question;
+var prompt = document.createElement("h3")
+prompt.textContent = desiredQuestion;
+prompt.setAttribute("style", "text-align: center;");
+
+questionContainer.appendChild(prompt);
+
+
+
+
+
 // If the user selects the correct answer, we move to the next question. 
 // if the user selects the incorrect question the time is dedcuted 15 seconds and we move to the next question. 
 // Loop this for the length of the array of questions.  5 Questions?

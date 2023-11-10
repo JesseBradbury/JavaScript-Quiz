@@ -52,3 +52,5 @@ var questions = [
         correctIndex: 3,
     },
 ]
+
+localStorage.setItem("questions", JSON.stringify(questions));
