@@ -3,14 +3,6 @@ body {
 }
 
 
-.start {
-    display: block;
-}
-
-.quiz {
-    display: none;
-}
-
-.score {
+.hidden {
     display: none;
 }
