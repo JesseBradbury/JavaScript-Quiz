@@ -63,21 +63,26 @@ var questionContainer = document.getElementById("quiz");
 function displayQuestion() {
 
     questionContainer.innerHTML = "";
-
+    
     var desiredQuestion = storedQuestions[questionIndex].question;
     var prompt = document.createElement("h3")
     prompt.textContent = desiredQuestion;
     prompt.setAttribute("style", "text-align: center");
     prompt.setAttribute("id", "quiz");
     questionContainer.appendChild(prompt);
+    
+    // If the user selects the correct answer, we move to the next question. 
+    // if the user selects the incorrect question the time is dedcuted 15 seconds and we move to the next question. 
+    // Loop this for the length of the array of questions.  5 Questions?
 
     // This function checks if the correct answer was selected, if not it subtracts 10 seconds. 
     // Once the last question is selected, it starts the function for showing the score page. 
-
+    
     function handleButtonClick() {
         console.log("handleButtonClick called");
         var correctIndex = storedQuestions[questionIndex].correctIndex;
 
+        // TODO: Add a notificaton for correct or incorrect respopnse. 
         if (this.textContent !== storedQuestions[questionIndex].choices[correctIndex]) {
             time -= 10;
         }
@@ -131,18 +136,7 @@ function displayQuestion() {
 
 
 
-// var scoreSection = document.getElementById("score");
 
-// var scoreHeading = document.createElement("h2");
-// scoreHeading.textContent = "All Done!";
-// scoreSection.appendChild(scoreHeading);
-
-
-
-
-// If the user selects the correct answer, we move to the next question. 
-// if the user selects the incorrect question the time is dedcuted 15 seconds and we move to the next question. 
-// Loop this for the length of the array of questions.  5 Questions?
 
 // When all questions have been asnwered, the score/time is recorded and we move to the scoreboard screen. 
 // The user is prompted to put in their Initials. 
