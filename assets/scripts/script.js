@@ -71,8 +71,8 @@ function displayQuestion() {
     prompt.setAttribute("id", "quiz");
     questionContainer.appendChild(prompt);
 
-// This function checks if the correct answer was selected, if not it subtracts 10 seconds. 
-// Once the last question is selected, it starts the function for showing the score page. 
+    // This function checks if the correct answer was selected, if not it subtracts 10 seconds. 
+    // Once the last question is selected, it starts the function for showing the score page. 
 
     function handleButtonClick() {
         console.log("handleButtonClick called");
@@ -93,8 +93,8 @@ function displayQuestion() {
 
 
 
-// This is the function that runs after the quiz
-// This will start the score section.
+    // This is the function that runs after the quiz
+    // This will start the score section.
     function showScorePage() {
         // debugger
         var quizSection = document.getElementById("quiz");
@@ -128,6 +128,8 @@ function displayQuestion() {
     }
 
 }
+
+
 
 // var scoreSection = document.getElementById("score");
 
