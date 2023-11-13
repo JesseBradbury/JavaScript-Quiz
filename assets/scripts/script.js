@@ -38,6 +38,9 @@ var questionContainer = document.querySelector('#quiz');
 let time = 75;
 // This is the button press events. Sets the display of the start-page section to hidden
 // sets the question container page to visible. 
+
+var timerInterval;
+
 startBtn.addEventListener("click", function () {
     startText.classList.add("hidden")
 
@@ -45,9 +48,13 @@ startBtn.addEventListener("click", function () {
     questionContainer.setAttribute("style", "text-align: center; margin: auto; display: flex; flex-direction: column; align-items: center;");
 
     timer.textContent = time;
-    let timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         time--;
         timer.textContent = time;
+
+        if (time <= 0) {
+            clearInterval(timerInterval);
+        }
     }, 1000)
 
     displayQuestion();
@@ -91,6 +98,7 @@ function displayQuestion() {
             questionIndex++;
             displayQuestion();
         } else {
+            clearInterval(timerInterval);
             showScorePage();
             console.log("Quiz completed!");
         }
@@ -109,6 +117,9 @@ function displayQuestion() {
         quizSection.setAttribute("style", "display: none");
 
         scoreSection.classList.remove("hidden");
+
+        // clearInterval(timerInterval);
+
         scoreSection.innerHTML = "";
 
         var scoreSection = document.getElementById("score");
