@@ -70,21 +70,21 @@ var questionContainer = document.getElementById("quiz");
 function displayQuestion() {
 
     questionContainer.innerHTML = "";
-    
+
     var desiredQuestion = storedQuestions[questionIndex].question;
     var prompt = document.createElement("h3")
     prompt.textContent = desiredQuestion;
     prompt.setAttribute("style", "text-align: center");
     prompt.setAttribute("id", "quiz");
     questionContainer.appendChild(prompt);
-    
+
     // If the user selects the correct answer, we move to the next question. 
     // if the user selects the incorrect question the time is dedcuted 15 seconds and we move to the next question. 
     // Loop this for the length of the array of questions.  5 Questions?
 
     // This function checks if the correct answer was selected, if not it subtracts 10 seconds. 
     // Once the last question is selected, it starts the function for showing the score page. 
-    
+
     function handleButtonClick() {
         console.log("handleButtonClick called");
         var correctIndex = storedQuestions[questionIndex].correctIndex;
@@ -113,20 +113,59 @@ function displayQuestion() {
         var quizSection = document.getElementById("quiz");
         var scoreSection = document.getElementById("score");
 
-        quizSection.classList.add("hidden");
-        quizSection.setAttribute("style", "display: none");
-
-        scoreSection.classList.remove("hidden");
-
-        // clearInterval(timerInterval);
-
-        scoreSection.innerHTML = "";
-
-        var scoreSection = document.getElementById("score");
-
+        clearInterval(timerInterval);
         var scoreHeading = document.createElement("h2");
         scoreHeading.textContent = "All Done!";
         scoreSection.appendChild(scoreHeading);
+
+        var userTime = time;
+        var timeDisplay = document.createElement("p");
+        timeDisplay.textContent = "Your Time: " + userTime + " seconds";
+        scoreSection.appendChild(timeDisplay);
+
+        var nameInput = document.createElement("input");
+        nameInput.setAttribute("type", "text");
+        nameInput.setAttribute("placeholder", "Enter Your Name");
+
+        var submitButton = document.createElement("button");
+        submitButton.textContent = "Submit";
+        submitButton.addEventListener("click", function () {
+            var userName = nameInput.value;
+            var userTime = time;
+            storeScore(userName, userTime);
+
+            displayHighScores();
+        });
+
+        scoreSection.appendChild(nameInput);
+        scoreSection.appendChild(submitButton);
+
+        // Hides quiz section and shows Score page
+        quizSection.classList.add("hidden");
+        quizSection.setAttribute("style", "display: none");
+        scoreSection.classList.remove("hidden");
+        quizSection.innerHTML = "";
+
+    }
+
+    function storeScore(userName, userTime) {
+        var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+        var newScore = {
+            name: userName,
+            time: userTime
+        };
+        highScores.push(newScore);
+        highScores.sort(function (a, b) {
+            return a.time - b.time;
+        });
+
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+    }
+
+    function displayHighScores() {
+        var highScores = JSON.parse(localStorage.getItem("scores")) || [];
+        console.log(highScores);
     }
 
     var answers = storedQuestions[questionIndex].choices;
