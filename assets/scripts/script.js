@@ -25,6 +25,9 @@ startDiv.appendChild(title);
 startDiv.appendChild(description);
 startDiv.appendChild(startButton);
 
+
+
+
 // Timer and Button Logic
 var timer = document.querySelector('#timer');
 var startBtn = document.querySelector('#start');
@@ -39,6 +42,7 @@ startBtn.addEventListener("click", function(){
 startText.classList.add("hidden")
 
 questionContainer.classList.remove("hidden")
+questionContainer.setAttribute("style", "text-align: center; margin: auto; display: flex; flex-direction: column; align-items: center;");
 
 timer.textContent = time;
 let timerInterval = setInterval(function () {
@@ -55,9 +59,24 @@ var storedQuestions = JSON.parse(localStorage.getItem("questions"));
 var desiredQuestion = storedQuestions[0].question;
 var prompt = document.createElement("h3")
 prompt.textContent = desiredQuestion;
-prompt.setAttribute("style", "text-align: center;");
-
+prompt.setAttribute("style", "text-align: center");
+prompt.setAttribute("id", "quiz");
 questionContainer.appendChild(prompt);
+
+
+var answers = storedQuestions[0].choices;
+
+for (var i = 0; i < answers.length; i++) {
+
+    var answerButton = document.createElement("button");
+    answerButton.classList.add("question-button");
+    answerButton.textContent = answers[i];
+    
+    questionContainer.appendChild(answerButton);
+}
+
+
+
 
 
 
