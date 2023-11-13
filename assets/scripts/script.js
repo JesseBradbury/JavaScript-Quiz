@@ -38,44 +38,83 @@ var questionContainer = document.querySelector('#quiz');
 let time = 75;
 // This is the button press events. Sets the display of the start-page section to hidden
 // sets the question container page to visible. 
-startBtn.addEventListener("click", function(){
-startText.classList.add("hidden")
+startBtn.addEventListener("click", function () {
+    startText.classList.add("hidden")
 
-questionContainer.classList.remove("hidden")
-questionContainer.setAttribute("style", "text-align: center; margin: auto; display: flex; flex-direction: column; align-items: center;");
+    questionContainer.classList.remove("hidden")
+    questionContainer.setAttribute("style", "text-align: center; margin: auto; display: flex; flex-direction: column; align-items: center;");
 
-timer.textContent = time;
-let timerInterval = setInterval(function () {
-    time--;
     timer.textContent = time;
-}, 1000)
-    
+    let timerInterval = setInterval(function () {
+        time--;
+        timer.textContent = time;
+    }, 1000)
+
+    displayQuestion();
 })
 
 
 // question text is displayed with 4 multiple choice answers, this will be pulled from an array
 var storedQuestions = JSON.parse(localStorage.getItem("questions"));
+var questionIndex = 0;
 
-var desiredQuestion = storedQuestions[0].question;
-var prompt = document.createElement("h3")
-prompt.textContent = desiredQuestion;
-prompt.setAttribute("style", "text-align: center");
-prompt.setAttribute("id", "quiz");
-questionContainer.appendChild(prompt);
+var questionContainer = document.getElementById("quiz");
 
+function displayQuestion() {
 
-var answers = storedQuestions[0].choices;
+    questionContainer.innerHTML = "";
 
-for (var i = 0; i < answers.length; i++) {
+    var desiredQuestion = storedQuestions[questionIndex].question;
+    var prompt = document.createElement("h3")
+    prompt.textContent = desiredQuestion;
+    prompt.setAttribute("style", "text-align: center");
+    prompt.setAttribute("id", "quiz");
+    questionContainer.appendChild(prompt);
 
-    var answerButton = document.createElement("button");
-    answerButton.classList.add("question-button");
-    answerButton.textContent = answers[i];
+    function handleButtonClick() {
+        questionIndex++;
     
-    questionContainer.appendChild(answerButton);
+        var correctIndex = storedQuestions[questionIndex - 1].correctIndex;
+        
+        if (this.textContent !== storedQuestions[questionIndex -1].choices[correctIndex]) {
+            time -= 10;
+        }
+
+        if (questionIndex < storedQuestions.length) {
+            displayQuestion();
+        } else {
+            // Move to the score page when all questions are answered
+            // showScorePage();
+            console.log("quiz completed!");
+        }
+    }
+
+    var answers = storedQuestions[questionIndex].choices;
+
+    for (var i = 0; i < answers.length; i++) {
+
+        var answerButton = document.createElement("button");
+        answerButton.classList.add("question-button");
+        answerButton.textContent = answers[i];
+
+        answerButton.addEventListener("click", handleButtonClick);
+// answerButton.addEventListener("click", function(){
+//     questionIndex++;
+
+//     if (questionIndex < storedQuestions.length) {
+//         displayQuestion()
+//     }
+//     else {
+//         // add move to score page logic
+//         console.log("quiz completed!");
+//     }
+// });
+
+
+        questionContainer.appendChild(answerButton);
+    }
+
 }
-
-
 
 
 
