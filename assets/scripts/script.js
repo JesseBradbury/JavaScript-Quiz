@@ -71,22 +71,46 @@ function displayQuestion() {
     prompt.setAttribute("id", "quiz");
     questionContainer.appendChild(prompt);
 
+// This function checks if the correct answer was selected, if not it subtracts 10 seconds. 
+// Once the last question is selected, it starts the function for showing the score page. 
+
     function handleButtonClick() {
-        questionIndex++;
-    
-        var correctIndex = storedQuestions[questionIndex - 1].correctIndex;
-        
-        if (this.textContent !== storedQuestions[questionIndex -1].choices[correctIndex]) {
+        console.log("handleButtonClick called");
+        var correctIndex = storedQuestions[questionIndex].correctIndex;
+
+        if (this.textContent !== storedQuestions[questionIndex].choices[correctIndex]) {
             time -= 10;
         }
 
-        if (questionIndex < storedQuestions.length) {
+        if (questionIndex < storedQuestions.length - 1) {
+            questionIndex++;
             displayQuestion();
         } else {
-            // Move to the score page when all questions are answered
-            // showScorePage();
-            console.log("quiz completed!");
+            showScorePage();
+            console.log("Quiz completed!");
         }
+    }
+
+
+
+// This is the function that runs after the quiz
+// This will start the score section.
+    function showScorePage() {
+        // debugger
+        var quizSection = document.getElementById("quiz");
+        var scoreSection = document.getElementById("score");
+
+        quizSection.classList.add("hidden");
+        quizSection.setAttribute("style", "display: none");
+
+        scoreSection.classList.remove("hidden");
+        scoreSection.innerHTML = "";
+
+        var scoreSection = document.getElementById("score");
+
+        var scoreHeading = document.createElement("h2");
+        scoreHeading.textContent = "All Done!";
+        scoreSection.appendChild(scoreHeading);
     }
 
     var answers = storedQuestions[questionIndex].choices;
@@ -98,17 +122,6 @@ function displayQuestion() {
         answerButton.textContent = answers[i];
 
         answerButton.addEventListener("click", handleButtonClick);
-// answerButton.addEventListener("click", function(){
-//     questionIndex++;
-
-//     if (questionIndex < storedQuestions.length) {
-//         displayQuestion()
-//     }
-//     else {
-//         // add move to score page logic
-//         console.log("quiz completed!");
-//     }
-// });
 
 
         questionContainer.appendChild(answerButton);
@@ -116,7 +129,11 @@ function displayQuestion() {
 
 }
 
+// var scoreSection = document.getElementById("score");
 
+// var scoreHeading = document.createElement("h2");
+// scoreHeading.textContent = "All Done!";
+// scoreSection.appendChild(scoreHeading);
 
 
 

@@ -49,7 +49,7 @@ var questions = [
             "yellow",
             "purple",
         ],
-        correctIndex: 3,
+        correctIndex: 0,
     },
 ]
 
