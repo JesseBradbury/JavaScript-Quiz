@@ -9,12 +9,14 @@ body {
 
 .question-button {
     display: block;
-    background-color: #600a92;
+    background-color: #5F43F7;
     color: #fff;
     text-align: center;
     width: 40%;
     height: 75px;
     align-items: center;
+    margin: 4px;
+    border-radius: 25px;
 
 }
 

@@ -19,12 +19,25 @@ startButton.setAttribute("id", "start")
 startButton.textContent = "Start Quiz!";
 // Snagged these styles from the previous project
 // TODO: Style this differently. 
-startButton.setAttribute("style", "border: none; background-color: hsl(360, 91%, 36%); border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%); display: inline-block; font-size: 22px; line-height: 22px; margin: 16px 16px 16px 20px; padding: 14px 34px; text-align: center; cursor: pointer;")
+startButton.setAttribute("style", "border: none; background-color: #5F43F7; border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%); display: inline-block; font-size: 22px; line-height: 22px; margin: 16px 16px 16px 20px; padding: 14px 34px; text-align: center; cursor: pointer;")
 
 startDiv.appendChild(title);
 startDiv.appendChild(description);
 startDiv.appendChild(startButton);
 
+
+var topBarSpacing = document.querySelector(".time-header");
+topBarSpacing.setAttribute("style", "display: flex; justify-content: space-between");
+
+var highScoreBtn = document.createElement("button");
+highScoreBtn.setAttribute("id", "high-score-page");
+highScoreBtn.setAttribute("style", "margin: 16px; cursor: pointer; border: none; background-color: #5F43F7; border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%);")
+highScoreBtn.textContent = "High Scores";
+highScoreBtn.addEventListener("click", function () {
+    window.location.href = "highscore.html";
+});
+
+topBarSpacing.appendChild(highScoreBtn);
 
 
 
@@ -76,20 +89,21 @@ function showScorePage() {
             var userTime = time;
             storeScore(userName, userTime);
 
-            window.location.href = "highscore.html"
+            window.location.href = "highscore.html";
             // displayHighScores();
         });
 
         scoreSection.appendChild(nameInput);
         scoreSection.appendChild(submitButton);
 
-        var timeHeadder = document.querySelector(".time-header")
+        var timeHeader = document.querySelector(".time-header")
         // Hides quiz section and shows Score page
         quizSection.classList.add("hidden");
         quizSection.setAttribute("style", "display: none");
         scoreSection.classList.remove("hidden");
         quizSection.innerHTML = "";
-        timeHeadder.classList.add("hidden");
+        timeHeader.classList.add("hidden");
+        timeHeader.setAttribute("style", "display: none");
 
     }
 
@@ -229,11 +243,11 @@ function displayQuestion() {
     //     quizSection.setAttribute("style", "display: none");
     //     scoreSection.classList.remove("hidden");
     //     quizSection.innerHTML = "";
-    //     timeHeadder.classList.add("hidden");
+    //     timeHeader.classList.add("hidden");
 
     // }
 
-    // var timeHeadder = document.querySelector(".time-header")
+    // var timeHeader = document.querySelector(".time-header")
 
     // function storeScore(userName, userTime) {
     //     var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
@@ -271,8 +285,6 @@ function displayQuestion() {
     }
 
 }
-
-
 
 
 
