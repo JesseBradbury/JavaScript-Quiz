@@ -16,4 +16,4 @@ Question Example
 High Scores
 ![screenshot of asignment](./assets/images/ss4.png)
 
-## [Click here to view my project!](https://jessebradbury.github.io/Password-Generator/)
+## [Click here to view my project!](https://jessebradbury.github.io/JavaScript-Quiz/)
