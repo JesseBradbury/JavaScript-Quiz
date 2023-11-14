@@ -11,9 +11,9 @@ Enjoy!
 
 ## Screenshots
 Question Example
-![screenshot of asignment](./Assets/Images/ss2.png)
+![screenshot of asignment](./assets/images/ss2.png)
 
 High Scores
-![screenshot of asignment](./Assets/Images/ss4.png)
+![screenshot of asignment](./assets/images/ss4.png)
 
 ## [Click here to view my project!](https://jessebradbury.github.io/Password-Generator/)
