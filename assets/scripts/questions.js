@@ -2,54 +2,54 @@
 
 var questions = [
     {
-        question: "This is question 1 - what color is the sky?",
+        question: "Which built-in method returns the length of a string in JavaScript?",
         choices: [
-            "blue",
-            "green",
-            "yellow",
-            "purple",
+            "length()",
+            "size()",
+            "count()",
+            "charAt()",
         ],
         correctIndex: 0,
     },
     {
-        question: "This is question 2?",
+        question: "How do you comment in JavaScript?",
         choices: [
-            "blue",
-            "green",
-            "yellow",
-            "purple",
+            "# This is a comment",
+            "/ This is a comment /",
+            "<!-- This is a comment -->",
+            "// This is a comment",
+        ],
+        correctIndex: 3,
+    },
+    {
+        question: "What does the 'DOM' stand for?",
+        choices: [
+            "Data Object Model",
+            "Document Object Model",
+            "Dynamic Object Model",
+            "Document Oriented Model",
+        ],
+        correctIndex: 1,
+    },
+    {
+        question: "What is the purpose of the 'addEventListener' method in JavaScript?",
+        choices: [
+            "To handle events like clicks or keypresses",
+            "To create a new HTML element",
+            "To add styles to a webpage",
+            "To define a JavaScript function",
         ],
         correctIndex: 0,
     },
     {
-        question: "This is question 3.",
+        question: "Which operator is used for strict equality comparison in JavaScript?",
         choices: [
-            "blue",
-            "green",
-            "yellow",
-            "purple",
+            "==",
+            "===",
+            "!=",
+            "!==",
         ],
-        correctIndex: 0,
-    },
-    {
-        question: "This is question 4!",
-        choices: [
-            "blue",
-            "green",
-            "yellow",
-            "purple",
-        ],
-        correctIndex: 0,
-    },
-    {
-        question: "This is question 5...",
-        choices: [
-            "blue",
-            "green",
-            "yellow",
-            "purple",
-        ],
-        correctIndex: 0,
+        correctIndex: 1,
     },
 ]
 

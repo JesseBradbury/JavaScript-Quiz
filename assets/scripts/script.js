@@ -73,7 +73,7 @@ function checkTimeAndShowScore() {
         showScorePage();
     }
 }
-
+// var feedbackContainer = document.getElementById("feedback-container");
 // This is the function that runs after the quiz
 // This will start the score section.
 function showScorePage() {
@@ -97,6 +97,8 @@ function showScorePage() {
 
     var submitButton = document.createElement("button");
     submitButton.textContent = "Submit";
+    submitButton.setAttribute("style", "margin: 5px; padding: 4px; cursor: pointer; border: none; background-color: #5F43F7; border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%);")
+
     submitButton.addEventListener("click", function () {
         var userName = nameInput.value;
         var userTime = time;
@@ -196,11 +198,27 @@ function displayQuestion() {
     //     questionContainer.appendChild(answerButton);
     // }
 
-    function handleButtonClick() {
-        console.log("handleButtonClick called");
-        var correctIndex = storedQuestions[questionIndex].correctIndex;
+    // var feedbackContainer = document.getElementById("feedback-container");
 
+    var feedbackContainer = document.getElementById("feedback-container");
+    
+    function handleButtonClick() {
+        var correctIndex = storedQuestions[questionIndex].correctIndex;
+        // debugger
         // TODO: Add a notificaton for correct or incorrect respopnse. 
+        var feedback = document.createElement("p");
+        if (this.textContent === storedQuestions[questionIndex].choices[correctIndex]) {
+            feedback.textContent = "Correct!";
+        } else {
+            feedback.textContent = "Incorrect!";
+        };
+        feedback.setAttribute("style", "margin-top: 10px; color: gray; font-style: italic;");
+        feedbackContainer.appendChild(feedback);
+
+        setTimeout(function () {
+            feedback.remove();
+        }, 2000);
+
         if (this.textContent !== storedQuestions[questionIndex].choices[correctIndex]) {
             time -= 10;
         }
