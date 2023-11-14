@@ -145,8 +145,11 @@ function displayQuestion() {
         quizSection.setAttribute("style", "display: none");
         scoreSection.classList.remove("hidden");
         quizSection.innerHTML = "";
+        timeHeadder.classList.add("hidden");
 
     }
+
+    var timeHeadder = document.querySelector(".time-header");
 
     function storeScore(userName, userTime) {
         var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
