@@ -45,12 +45,24 @@ buttons.setAttribute("style", "text-align:center");
 var backButton = document.createElement("button");
 backButton.textContent = "Back to Quiz";
 backButton.setAttribute("style", "margin: 16px; padding: 10px; cursor: pointer; border: none; background-color: #5F43F7; border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%);")
+backButton.addEventListener("mouseover", function () {
+    backButton.style.boxShadow = "0 8px 13px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)";
+})
+backButton.addEventListener("mouseout", function () {
+    backButton.style.boxShadow = "";
+});
 backButton.addEventListener("click", function () {
     window.location.href = "index.html";
 })
 var clearButton = document.createElement("button");
 clearButton.textContent = "Reset High Scores";
 clearButton.setAttribute("style", "margin: 16px; padding: 10px; cursor: pointer; border: none; background-color: #5F43F7; border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%);")
+clearButton.addEventListener("mouseover", function () {
+    clearButton.style.boxShadow = "0 8px 13px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)";
+})
+clearButton.addEventListener("mouseout", function () {
+    clearButton.style.boxShadow = "";
+});
 clearButton.addEventListener("click", function () {
     resetLeaderboard();
 })

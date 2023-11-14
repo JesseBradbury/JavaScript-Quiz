@@ -20,6 +20,13 @@ startButton.textContent = "Start Quiz!";
 // Snagged these styles from the previous project
 // TODO: Style this differently. 
 startButton.setAttribute("style", "border: none; background-color: #5F43F7; border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%); display: inline-block; font-size: 22px; line-height: 22px; margin: 16px 16px 16px 20px; padding: 14px 34px; text-align: center; cursor: pointer;")
+startButton.addEventListener("mouseover", function () {
+    startButton.style.boxShadow = "0 8px 13px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)";
+})
+startButton.addEventListener("mouseout", function () {
+    startButton.style.boxShadow = "";
+});
+
 
 startDiv.appendChild(title);
 startDiv.appendChild(description);
@@ -33,6 +40,12 @@ var highScoreBtn = document.createElement("button");
 highScoreBtn.setAttribute("id", "high-score-page");
 highScoreBtn.setAttribute("style", "margin: 16px; cursor: pointer; border: none; background-color: #5F43F7; border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%);")
 highScoreBtn.textContent = "High Scores";
+highScoreBtn.addEventListener("mouseover", function () {
+    highScoreBtn.style.boxShadow = "0 8px 13px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)";
+})
+highScoreBtn.addEventListener("mouseout", function () {
+    highScoreBtn.style.boxShadow = "";
+});
 highScoreBtn.addEventListener("click", function () {
     window.location.href = "highscore.html";
 });
@@ -61,67 +74,67 @@ function checkTimeAndShowScore() {
     }
 }
 
-  // This is the function that runs after the quiz
-    // This will start the score section.
+// This is the function that runs after the quiz
+// This will start the score section.
 function showScorePage() {
-        // debugger
-        var quizSection = document.getElementById("quiz");
-        var scoreSection = document.getElementById("score");
+    // debugger
+    var quizSection = document.getElementById("quiz");
+    var scoreSection = document.getElementById("score");
 
-        clearInterval(timerInterval);
-        var scoreHeading = document.createElement("h2");
-        scoreHeading.textContent = "All Done!";
-        scoreSection.appendChild(scoreHeading);
+    clearInterval(timerInterval);
+    var scoreHeading = document.createElement("h2");
+    scoreHeading.textContent = "All Done!";
+    scoreSection.appendChild(scoreHeading);
 
+    var userTime = time;
+    var timeDisplay = document.createElement("p");
+    timeDisplay.textContent = "Your Time: " + userTime + " seconds";
+    scoreSection.appendChild(timeDisplay);
+
+    var nameInput = document.createElement("input");
+    nameInput.setAttribute("type", "text");
+    nameInput.setAttribute("placeholder", "Enter Your Name");
+
+    var submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    submitButton.addEventListener("click", function () {
+        var userName = nameInput.value;
         var userTime = time;
-        var timeDisplay = document.createElement("p");
-        timeDisplay.textContent = "Your Time: " + userTime + " seconds";
-        scoreSection.appendChild(timeDisplay);
+        storeScore(userName, userTime);
 
-        var nameInput = document.createElement("input");
-        nameInput.setAttribute("type", "text");
-        nameInput.setAttribute("placeholder", "Enter Your Name");
+        window.location.href = "highscore.html";
+        // displayHighScores();
+    });
 
-        var submitButton = document.createElement("button");
-        submitButton.textContent = "Submit";
-        submitButton.addEventListener("click", function () {
-            var userName = nameInput.value;
-            var userTime = time;
-            storeScore(userName, userTime);
+    scoreSection.appendChild(nameInput);
+    scoreSection.appendChild(submitButton);
 
-            window.location.href = "highscore.html";
-            // displayHighScores();
-        });
+    var timeHeader = document.querySelector(".time-header")
+    // Hides quiz section and shows Score page
+    quizSection.classList.add("hidden");
+    quizSection.setAttribute("style", "display: none");
+    scoreSection.classList.remove("hidden");
+    quizSection.innerHTML = "";
+    timeHeader.classList.add("hidden");
+    timeHeader.setAttribute("style", "display: none");
 
-        scoreSection.appendChild(nameInput);
-        scoreSection.appendChild(submitButton);
+}
 
-        var timeHeader = document.querySelector(".time-header")
-        // Hides quiz section and shows Score page
-        quizSection.classList.add("hidden");
-        quizSection.setAttribute("style", "display: none");
-        scoreSection.classList.remove("hidden");
-        quizSection.innerHTML = "";
-        timeHeader.classList.add("hidden");
-        timeHeader.setAttribute("style", "display: none");
+// This is the Function that will store the score and name in local storage
+function storeScore(userName, userTime) {
+    var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-    }
+    var newScore = {
+        name: userName,
+        time: userTime
+    };
+    highScores.push(newScore);
+    highScores.sort(function (b, a) {
+        return a.time - b.time;
+    });
 
-    // This is the Function that will store the score and name in local storage
-    function storeScore(userName, userTime) {
-        var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-
-        var newScore = {
-            name: userName,
-            time: userTime
-        };
-        highScores.push(newScore);
-        highScores.sort(function (b, a) {
-            return a.time - b.time;
-        });
-
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-    }
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+}
 
 // This is the function that will start the quiz when the user hits the startBtn
 startBtn.addEventListener("click", function () {
@@ -264,10 +277,10 @@ function displayQuestion() {
     //     localStorage.setItem("highScores", JSON.stringify(highScores));
     // }
 
-    function displayHighScores() {
-        var highScores = JSON.parse(localStorage.getItem("scores")) || [];
-        console.log(highScores);
-    }
+    // function displayHighScores() {
+    //     var highScores = JSON.parse(localStorage.getItem("scores")) || [];
+    //     console.log(highScores);
+    // }
 
     var answers = storedQuestions[questionIndex].choices;
 
