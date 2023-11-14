@@ -84,32 +84,47 @@ function showScorePage() {
     clearInterval(timerInterval);
     var scoreHeading = document.createElement("h2");
     scoreHeading.textContent = "All Done!";
+    scoreHeading.setAttribute("style", "text-align: center");
     scoreSection.appendChild(scoreHeading);
 
     var userTime = time;
     var timeDisplay = document.createElement("p");
     timeDisplay.textContent = "Your Time: " + userTime + " seconds";
+    timeDisplay.setAttribute("style", "text-align: center");
     scoreSection.appendChild(timeDisplay);
+
+    var inputContainer = document.createElement("section")
+    inputContainer.setAttribute("style", "display: flex; justify-content: center; margin-top: 20px;")
 
     var nameInput = document.createElement("input");
     nameInput.setAttribute("type", "text");
-    nameInput.setAttribute("placeholder", "Enter Your Name");
+    nameInput.setAttribute("placeholder", "Enter Your Initials");
+    // nameInput.setAttribute("style", "align-items: center");
 
     var submitButton = document.createElement("button");
     submitButton.textContent = "Submit";
     submitButton.setAttribute("style", "margin: 5px; padding: 4px; cursor: pointer; border: none; background-color: #5F43F7; border-radius: 25px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px; color: hsl(0, 0%, 100%);")
 
     submitButton.addEventListener("click", function () {
-        var userName = nameInput.value;
-        var userTime = time;
-        storeScore(userName, userTime);
-
-        window.location.href = "highscore.html";
-        // displayHighScores();
+        var userName = nameInput.value.trim();
+        if (userName !== "") {
+            if (userName.length <= 3) {
+                var userTime = time;
+                storeScore(userName, userTime);
+                window.location.href = "highscore.html";
+            } else {
+                alert("Initials should be 3 characters or less.")
+            }
+            // displayHighScores();
+        } else {
+            alert("Please enter your initials.")
+        }
     });
 
-    scoreSection.appendChild(nameInput);
-    scoreSection.appendChild(submitButton);
+    inputContainer.appendChild(nameInput);
+    inputContainer.appendChild(submitButton);
+
+    scoreSection.appendChild(inputContainer);
 
     var timeHeader = document.querySelector(".time-header")
     // Hides quiz section and shows Score page
@@ -201,7 +216,7 @@ function displayQuestion() {
     // var feedbackContainer = document.getElementById("feedback-container");
 
     var feedbackContainer = document.getElementById("feedback-container");
-    
+
     function handleButtonClick() {
         var correctIndex = storedQuestions[questionIndex].correctIndex;
         // debugger
@@ -212,7 +227,7 @@ function displayQuestion() {
         } else {
             feedback.textContent = "Incorrect!";
         };
-        feedback.setAttribute("style", "margin-top: 10px; color: gray; font-style: italic;");
+        feedback.setAttribute("style", "margin-top: 10px; color: gray; font-style: italic; text-align: center;");
         feedbackContainer.appendChild(feedback);
 
         setTimeout(function () {
