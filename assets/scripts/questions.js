@@ -1,4 +1,4 @@
-// This will be the Array of questions with correct answers
+// This is our array of questions and answers, with a correct answer index. Obtained examples of questions from ChatGPT and adjusted them. 
 
 var questions = [
     {

@@ -38,7 +38,7 @@ container.style.flexDirection = "column";
 container.style.alignItems = "center";
 
 
-
+// This section contains code for the back to quiz button and clear scores button. 
 var buttons = document.querySelector("#buttons")
 buttons.setAttribute("style", "text-align:center");
 
